@@ -1,6 +1,6 @@
 # ccwc
 
-Unix wc tool implemented from scratch with Go
+Linux wc tool implemented from scratch with Go
 
 
 This Repo hosts my solution to the wc coding challenge on https://codingchallenges.fyi/challenges/challenge-wc/ by John Cricket
