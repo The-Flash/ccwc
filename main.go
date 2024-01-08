@@ -22,6 +22,9 @@ func main() {
 	if err != nil {
 		f = os.Stdin
 	}
+	if f == nil {
+		panic("could not open file")
+	}
 	defer f.Close()
 	libWc := wc.NewWC(f)
 	if *wcPtr {
