@@ -45,7 +45,8 @@ func main() {
 	}
 
 	if !(*wcPtr || *ccPtr || *lcPtr || *bcPtr) {
-		formatOutput(libWc.ByteCount(), libWc.LineCount(), libWc.WordCount(), -1, filepath)
+		_, wordCount, byteCount, lineCount := libWc.CountAll()
+		formatOutput(byteCount, lineCount, wordCount, -1, filepath)
 		return
 	}
 
