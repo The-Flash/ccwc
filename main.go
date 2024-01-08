@@ -15,13 +15,12 @@ func main() {
 	bcPtr := flag.Bool("c", false, "Count bytes")
 	flag.Parse()
 
+	var f *os.File
+
 	filepath := flag.Arg(0)
-	if filepath == "" {
-		panic("no file passed")
-	}
 	f, err := os.Open(filepath)
 	if err != nil {
-		panic("could not open file")
+		f = os.Stdin
 	}
 	defer f.Close()
 	libWc := wc.NewWC(f)

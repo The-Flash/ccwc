@@ -13,7 +13,7 @@ func NewWC(r io.ReadSeeker) WC {
 	return WC{r: r}
 }
 
-func (w WC) ByteCount() int {
+func (w *WC) ByteCount() int {
 	count := 0
 	var p []byte = make([]byte, 4096)
 	w.r.Seek(0, 0)
@@ -30,7 +30,7 @@ func (w WC) ByteCount() int {
 	return count
 }
 
-func (w WC) LineCount() int {
+func (w *WC) LineCount() int {
 	count := 0
 	w.r.Seek(0, 0)
 	reader := bufio.NewReader(w.r)
@@ -44,7 +44,7 @@ func (w WC) LineCount() int {
 	return count
 }
 
-func (w WC) WordCount() int {
+func (w *WC) WordCount() int {
 	count := 0
 	w.r.Seek(0, 0)
 	scanner := bufio.NewScanner(w.r)
@@ -55,7 +55,7 @@ func (w WC) WordCount() int {
 	return count
 }
 
-func (w WC) CharCount() int {
+func (w *WC) CharCount() int {
 	count := 0
 	w.r.Seek(0, 0)
 	reader := bufio.NewReader(w.r)
