@@ -1,6 +1,8 @@
 package wc
 
 import (
+	"bufio"
+	"fmt"
 	"io"
 )
 
@@ -13,7 +15,19 @@ func NewWC(r io.Reader) WC {
 }
 
 func (w WC) ByteCount() int {
-	return 2
+	count := 0
+	var p []byte = make([]byte, 4096)
+	reader := bufio.NewReader(w.r)
+
+	for {
+		n, err := reader.Read(p)
+		if err != nil {
+			break
+		}
+		count = count + n
+	}
+
+	return count
 }
 
 func (w WC) LineCount() int {

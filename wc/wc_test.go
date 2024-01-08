@@ -10,6 +10,7 @@ func TestByteCount(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer r.Close()
 
 	wc := NewWC(r)
 	byteCount := wc.ByteCount()
@@ -25,6 +26,8 @@ func TestLineCount(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	defer r.Close()
+
 	wc := NewWC(r)
 	lineCount := wc.LineCount()
 	expectedCount := 7145
@@ -38,6 +41,8 @@ func TestWordCount(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
+	defer r.Close()
 
 	wc := NewWC(r)
 	wordCount := wc.WordCount()
