@@ -6,16 +6,17 @@ import (
 )
 
 type WC struct {
-	r io.Reader
+	r io.ReadSeeker
 }
 
-func NewWC(r io.Reader) WC {
+func NewWC(r io.ReadSeeker) WC {
 	return WC{r: r}
 }
 
 func (w WC) ByteCount() int {
 	count := 0
 	var p []byte = make([]byte, 4096)
+	w.r.Seek(0, 0)
 	reader := bufio.NewReader(w.r)
 
 	for {
@@ -31,6 +32,7 @@ func (w WC) ByteCount() int {
 
 func (w WC) LineCount() int {
 	count := 0
+	w.r.Seek(0, 0)
 	reader := bufio.NewReader(w.r)
 	for {
 		_, err := reader.ReadBytes('\n')
@@ -44,6 +46,7 @@ func (w WC) LineCount() int {
 
 func (w WC) WordCount() int {
 	count := 0
+	w.r.Seek(0, 0)
 	scanner := bufio.NewScanner(w.r)
 	scanner.Split(bufio.ScanWords)
 	for scanner.Scan() {
@@ -54,6 +57,7 @@ func (w WC) WordCount() int {
 
 func (w WC) CharCount() int {
 	count := 0
+	w.r.Seek(0, 0)
 	reader := bufio.NewReader(w.r)
 	for {
 		_, _, err := reader.ReadRune()
