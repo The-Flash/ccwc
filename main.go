@@ -54,8 +54,8 @@ func main() {
 
 func formatOutput(byteCount int, lineCount int, wordCount int, charCount int, filepath string) {
 	output := ""
-	if byteCount > -1 {
-		output += fmt.Sprint(byteCount) + " "
+	if charCount > -1 {
+		output += fmt.Sprint(charCount) + " "
 	}
 	if lineCount > -1 {
 		output += fmt.Sprint(lineCount) + " "
@@ -63,8 +63,8 @@ func formatOutput(byteCount int, lineCount int, wordCount int, charCount int, fi
 	if wordCount > -1 {
 		output += fmt.Sprint(wordCount) + " "
 	}
-	if charCount > -1 {
-		output += fmt.Sprint(charCount) + " "
+	if byteCount > -1 {
+		output += fmt.Sprint(byteCount) + " "
 	}
 	output += " " + filepath
 	fmt.Println(output)
