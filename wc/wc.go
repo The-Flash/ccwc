@@ -2,7 +2,6 @@ package wc
 
 import (
 	"bufio"
-	"fmt"
 	"io"
 )
 
@@ -31,9 +30,37 @@ func (w WC) ByteCount() int {
 }
 
 func (w WC) LineCount() int {
-	return 3
+	count := 0
+	reader := bufio.NewReader(w.r)
+	for {
+		_, err := reader.ReadBytes('\n')
+		if err != nil {
+			break
+		}
+		count = count + 1
+	}
+	return count
 }
 
 func (w WC) WordCount() int {
-	return 3
+	count := 0
+	scanner := bufio.NewScanner(w.r)
+	scanner.Split(bufio.ScanWords)
+	for scanner.Scan() {
+		count = count + 1
+	}
+	return count
+}
+
+func (w WC) CharCount() int {
+	count := 0
+	reader := bufio.NewReader(w.r)
+	for {
+		_, _, err := reader.ReadRune()
+		if err != nil {
+			break
+		}
+		count = count + 1
+	}
+	return count
 }

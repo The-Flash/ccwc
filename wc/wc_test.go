@@ -51,3 +51,19 @@ func TestWordCount(t *testing.T) {
 		t.Fatalf("got %d, want %d", wordCount, expectedCount)
 	}
 }
+
+func TestCharacterCount(t *testing.T) {
+	r, err := os.Open("../test.txt")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	defer r.Close()
+
+	wc := NewWC(r)
+	charCount := wc.CharCount()
+	expectedCount := 339292
+	if charCount != expectedCount {
+		t.Fatalf("got %d, want %d", charCount, expectedCount)
+	}
+}
